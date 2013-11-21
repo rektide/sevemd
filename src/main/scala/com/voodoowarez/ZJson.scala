@@ -2,11 +2,9 @@ package com.voodoowarez
 
 import java.util.zip.Inflater
 
-import scala.reflect.runtime.universe.TypeTag
-
 import com.fasterxml.jackson.databind.ObjectMapper
 
-class ZJson[T]()(implicit m: Manifest[T]) extends(Seq[Seq[Byte]] => Iterator[T]) {
+class ZJson[T](val klass: Class[T]) extends(Seq[Seq[Byte]] => Iterator[T]) {
 	val mapper = new ObjectMapper()
 	val inflater = new Inflater()
 	val buff = Array.fill[Byte](262144)(0)
@@ -16,7 +14,7 @@ class ZJson[T]()(implicit m: Manifest[T]) extends(Seq[Seq[Byte]] => Iterator[T])
 			inflater.setInput(ent.toArray)
 			val len = inflater.inflate(buff)
 			// http://fasterxml.github.io/jackson-databind/javadoc/2.0.0/com/fasterxml/jackson/databind/ObjectMapper.html#readValue(byte[], java.lang.Class)
-			val v = mapper.readValue(buff, 0, len, manifest[T].runtimeClass)
+			val v = mapper.readValue(buff, 0, len, klass)
 			v.asInstanceOf[T]
 		}).iterator
 	)
