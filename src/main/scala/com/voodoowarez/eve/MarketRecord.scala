@@ -1,6 +1,7 @@
-// http://dev.eve-central.com/unifieduploader/start
+package com.voodooware.eve
 
-class MarketRecord() {
-	val resultType : String
-	val version : String
+// http://dev.eve-central.com/unifieduploader/start
+class MarketRecord{
+	val resultType : String = null
+	val version : String = null
 }

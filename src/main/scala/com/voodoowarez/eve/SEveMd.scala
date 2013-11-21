@@ -1,12 +1,11 @@
 package com.voodooware.eve
 
+import akka.zeromq.Subscribe
+
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streaming.Seconds
-import org.apache.spark.streaming.Seconds
-import akka.zeromq.Subscribe
-import org.apache.spark.streaming.Seconds
+
 import com.voodoowarez.ZJson
-import org.apache.spark.storage.StorageLevel
 
 object SEveMd {
 
